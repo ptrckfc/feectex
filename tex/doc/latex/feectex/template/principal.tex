@@ -1,0 +1,132 @@
+%% principal.tex
+%!TeX encoding = UTF-8
+
+% Define o grau acadêmico e a língua principal do documento.
+% ATENÇÃO: a última língua declarada é a língua principal do
+% documento.
+\documentclass[
+    doutorado,              % Selecionar grau acadêmico: mestrado ou doutorado.
+%    cotutela,              % Remover comentário se houver cotutela.
+%    enlgish,
+%    french,
+%    spanish,
+    brazil
+]{feectex}
+
+\usepackage[T1]{fontenc}    % Imprime (output) caracteres acentuados.
+\usepackage[utf8]{inputenc} % Permite o uso (input) de caracteres acentuados.
+
+% Pacotes adicionais (adicione ou remova conforme sua
+% necessidade). Visite o site https://www.ctan.org para
+% consultar outros pacotes.
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{pdfpages}       % Permite importar arquivos PDF.
+\usepackage{hyperref}       % Viabiliza o uso de links internos e externos.
+\usepackage{lmodern}        % Emprega a fonte Latin Modern para o texto.
+\usepackage{subcaption}     % Inclusão de múltiplas figuras.
+
+% Diretório onde se encontram as imagens utilizadas no trabalho.
+% O comando pode ser modificado para incluir diversos diretórios:
+%   \graphicspath{{dir1/}{dir2/}...}
+\graphicspath{{./figuras/}}
+
+%
+% Informações da obra.
+%
+
+% Qual é o título do obra?
+\titulo{Título da Obra}
+
+% Qual é o seu nome e o número do seu RA?
+\autora{Nome da Autora}
+%\autor{Nome do Autor}
+\ra{999999}
+
+% Qual é o título e o nome da sua orientadora ou orientador?
+\orientadora{Profa. Dra. Nome da Orientadora}
+%\orientador{Prof. Dr. Nome do Orientador}
+
+% Qual é o título e o nome da sua coorientadora ou coorientador?
+% Se não houver, comente ambas as linhas abaixo.
+% \coorientadora{Profa. Dra. Nome da Coorientadora}
+\coorientador{Prof. Dr. Nome do Coorientador}
+
+% Qual é a universidade e o instituto ou faculdade?
+\universidade{Universidade Estadual de Campinas}
+\institutooufaculdade{Faculdade de Engenharia Elétrica e de Computação}
+
+% Qual é o nome da universidade de cotutela? Se houver,
+% modificar a opção na declaração da classe acima
+% (\documentclass(...)). Caso contrário, comente a linha abaixo.
+\universidadecotutela{Nome da Universidade (País)}
+
+% Qual é a cidade onde foi ou será realizada a defesa?
+\local{Campinas}
+
+% Qual data foi / será realizada a defesa?
+\diadefesa{XX}
+\mesdefesa{janeiro}
+\anodefesa{20XX}
+
+% Qual é a área de concentração do trabalho?
+\areaconcentracao{Engenharia de Computação}
+
+% Quais são os títulos e os nomes dos componentes da banca
+% examinadora? (Por enquanto, é necessário repetir o título
+% e o nome da orientadora ou orientador aqui.)
+\bancaexaminadora{%
+    Prof. Dr. Nome do Orientador (Presidente) \\%
+    Prof. Dr. Nome do Primeiro Membro \\%
+    Prof. Dr. Nome do Segundo Membro \\%
+    Prof. Dr. Nome do Terceiro Membro \\%
+    Prof. Dr. Nome do Quarto Membro
+}
+
+\begin{document}
+    % \hyphenation{}
+
+    % Elementos pré-textuais:
+    %   capa;
+    %   folha de rosto;
+    %   ficha catalográfica;
+    %   folha de aprovação;
+    %   dedicatoria;
+    %   agradecimentos;
+    %   epigrafe;
+    %   resumo / abstract;
+    %   lista de ilustrações;
+    %   lista de tabelas;
+    %   lista de abreviaturas e siglas;
+    %   lista de simbolos;
+    %   sumário.
+    % Comente os elementos não utilizados no seu trabalho.
+    \imprimircapa
+    \imprimirfolhaderosto
+    \imprimirfichacatalografica{ficha-catalografica.pdf}
+    \imprimirfolhaaprovacao
+    \imprimirdedicatoria{dedicatoria}
+    \imprimiragradecimentos{agradecimentos}
+    \imprimirepigrafe{epigrafe}
+    \imprimirresumo{resumo}
+    \imprimirlistailustracoes
+    \imprimirlistatabelas
+    \imprimirlistaabreviaturassiglassimbolos
+    \imprimirsumario
+
+    % Elementos textuais.
+    \textual
+    \part{Primeira Parte}
+    \include{capitulos/capitulo-1}
+
+    % Elementos pós-textuais:
+    %   bibliografia / referências;
+    %   apêndices;
+    %   asnexos.
+    % Comente os elementos não utilizados no seu trabalho.
+    \postextual
+    \bibliography{bibliografia}
+    \apendices
+    \include{apendices/apendice-A}
+    \anexos
+    \include{anexos/anexo-A}
+\end{document}
