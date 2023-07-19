@@ -15,6 +15,8 @@
 %
 % This work consists of the file feectex.cls.
 
+%!TeX encoding = UTF-8
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{feectex}[2023/06/16 v0.1 Classe FEEC / Unicamp]
 
@@ -76,7 +78,6 @@
     abnt-etal-list=0,
     abnt-etal-text=emph
 ]{abntex2cite}
-
 
 % Configuração das margens, do parágrafo e do texto.
 \setlrmarginsandblock{3cm}{2cm}{*}  % \setlrmarginsandblock{esquerda}{direita}
@@ -245,7 +246,7 @@
     \end{capa}
 }
 
-% Montagem do preambulo.
+% Montagem do preâmbulo.
 \preambulo{%
     \ifthenelse{\boolean{mestrado}}{Dissertação}{}%
     \ifthenelse{\boolean{doutorado}}{Tese}{}%
