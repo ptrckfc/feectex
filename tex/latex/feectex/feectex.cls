@@ -18,7 +18,7 @@
 %!TeX encoding = UTF-8
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{feectex}[2023/06/16 v0.1 Classe FEEC / Unicamp]
+\ProvidesClass{feectex}[2023/06/16 v1.0.0 Classe FEEC / Unicamp]
 
 % As opções exclusivas desta classe são processadas abaixo.
 \RequirePackage{ifthen}
