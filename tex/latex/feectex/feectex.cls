@@ -24,13 +24,13 @@
 \RequirePackage{ifthen}
 
 \newboolean{mestrado}
+\setboolean{mestrado}{false}%
 \newboolean{doutorado}
+\setboolean{doutorado}{false}%
 \DeclareOption{mestrado}{%
     \setboolean{mestrado}{true}%
-    \setboolean{doutorado}{false}%
 }
 \DeclareOption{doutorado}{%
-    \setboolean{mestrado}{false}%
     \setboolean{doutorado}{true}%
 }
 
@@ -69,6 +69,8 @@
 ]{abntex2}
 
 % Pacotes.
+\RequirePackage[T1]{fontenc}    % Imprime (output) caracteres acentuados.
+\RequirePackage[utf8]{inputenc} % Permite usar (input) caracteres acentuados.
 \RequirePackage{ragged2e}
 \RequirePackage{indentfirst}
 \RequirePackage{nomencl}
@@ -98,7 +100,7 @@
 % totalizando os 4 cm necessários.
 \setlength{\ABNTEXcitacaorecuo}{3cm}
 
-% Refação do\textual para correta enumeração das páginas.
+% Refação do \textual para correta enumeração das páginas.
 \renewcommand{\textual}{%
     \addtocounter{page}{1}%
     \pagestyle{abntheadings}%
