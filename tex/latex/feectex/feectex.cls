@@ -91,8 +91,8 @@
 ]{abntex2cite}
 
 % Configuração das margens, do parágrafo e do texto.
-\setlrmarginsandblock{3cm}{2cm}{*}  % \setlrmarginsandblock{esquerda}{direita}
-\setulmarginsandblock{3cm}{2cm}{*}  % \setulmarginsandblock{superior}{inferior}
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
 \checkandfixthelayout
 
 \setlength{\parindent}{2cm}
@@ -107,9 +107,8 @@
 
 % Margem da citação.
 % ATENÇÃO: o valor de \ABNTEXcitacaorecuo definido abaixo é
-% somado ao valor de \leftskip (de 1 cm, aparentemente),
-% totalizando os 4 cm necessários.
-\setlength{\ABNTEXcitacaorecuo}{3cm}
+% somado ao valor de \leftskip (de 1 cm, aparentemente).
+\setlength{\ABNTEXcitacaorecuo}{4cm}
 
 % Refação do \textual para correta enumeração das páginas.
 \renewcommand{\textual}{%

@@ -21,6 +21,12 @@ Exemplos:
     \item \verb|\citarano{autora}| produz \citarano{autora}.
 \end{itemize}
 
+Citação direta com mais de 3 linhas, por sua vez, é feita através do ambiente \verb|citacao|, ou seja, \verb|\begin{citacao}|\dots\verb|\end{citacao}|.
+
+\begin{citacao}
+    Nam dui ligula, fringilla a, euismod sodales, sollicitudin vel, wisi. Morbi auctor lorem non justo. Nam lacus libero, pretium at, lobortis vitae, ultricies et, tellus. Donec aliquet, tortor sed accumsan bibendum, erat ligula aliquet magna, vitae ornare odio metus a mi. Morbi ac orci et nisl hendrerit mollis. Suspendisse ut massa. Cras nec ante. Pellentesque a nulla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam tincidunt urna. Nulla ullamcorper vestibulum turpis. Pellentesque cursus luctus mauris.
+\end{citacao}
+
 \section{Notas de Rodapé}
 
 As notas de rodapé são declaradas através do comando \verb|\footnote{<nota>}|, por exemplo: a classe \feectex é derivada da classe abntex2\footnote{O abnTeX2 é uma evolução do abnTeX -- ABsurd Norms for TeX.}.
@@ -70,7 +76,7 @@ Exemplo:
 
 O tamanho das imagens pode ser escolhido através dos comandos \verb|width| e \verb|scale|.
 
-\begin{figure}[h!]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{capitulo-1/28421613139_a4472645e5_c.jpg}
     \caption[Galáxia M33]{Galáxia do Triângulo M33.}
