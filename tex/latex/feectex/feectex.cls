@@ -20,24 +20,24 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{feectex}[2023/07/19 v1.0.0 Classe FEEC / Unicamp]
 
-% As opções exclusivas desta classe são processadas abaixo.
 \RequirePackage{ifthen}
 
+% As opções exclusivas desta classe são processadas abaixo.
 \newboolean{mestrado}
-\setboolean{mestrado}{false}%
+\setboolean{mestrado}{false}
 \newboolean{doutorado}
-\setboolean{doutorado}{false}%
-\DeclareOption{mestrado}{%
-    \setboolean{mestrado}{true}%
+\setboolean{doutorado}{false}
+\DeclareOption{mestrado}{
+    \setboolean{mestrado}{true}
 }
-\DeclareOption{doutorado}{%
-    \setboolean{doutorado}{true}%
+\DeclareOption{doutorado}{
+    \setboolean{doutorado}{true}
 }
 
 \newboolean{cotutela}
 \setboolean{cotutela}{false}
-\DeclareOption{cotutela}{%
-    \setboolean{cotutela}{true}%
+\DeclareOption{cotutela}{
+    \setboolean{cotutela}{true}
 }
 
 % Por se tratar de texto de dissertação / tese, as opções
@@ -46,16 +46,16 @@
     \ClassError{feec-unicamp}{%
         Não é possível usar esta classe para escrever artigo.%
     }{%
-        A classe feec-unicamp deve ser utilizada para redação da dissertação de mestrado ou tese de doutorado apenas.%
-    }%
+        A classe feec-unicamp deve ser utilizada para redação da dissertação de mestrado ou tese de doutorado apenas.
+    }
 }
 
 \DeclareOption{twocolumn}{%
     \ClassError{feec-unicamp}{%
         Não é possível usar esta classe para escrever o texto em duas colunas.%
     }{%
-        O texto da dissertação de mestrado e a tese de doutorado deve ser escrito utilizando uma coluna.%
-    }%
+        O texto da dissertação de mestrado e a tese de doutorado deve ser escrito utilizando uma coluna.
+    }
 }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{abntex2}}
@@ -91,7 +91,8 @@
 % Estilo do capítulo.
 % Consulte o site:
 %   https://linorg.usp.br/CTAN/info/latex-samples/MemoirChapStyles/
-% para ver outros estilos. O estilo padrão do abnTeX2 é o abnt.
+% para ver outros estilos. O estilo padrão do abnTeX2 é o
+% abnt.
 \chapterstyle{abnt}
 
 % Margem da citação.
@@ -111,61 +112,59 @@
     \bookmarksetup{startatroot}%
 }
 
-%
-% Implementações e reimplementações da classe.
-%
+% Implementações e reimplementações exclusivas da classe.
 \newcommand{\feectex}{\textit{feectex}~}
 
-% Registro acadêmico.
-\providecommand{\imprimirra}{}
+% Registro acadêmico (RA).
+\newcommand{\imprimirra}{}
 \renewcommand{\ra}[1]{\renewcommand{\imprimirra}{#1}}
 
 % Redefinição de \autor e criação de \autora.
 \newboolean{autor}
 \setboolean{autor}{false}
-\renewcommand{\autor}[1]{%
-    \author{#1}%
-    \setboolean{autor}{true}%
+\renewcommand{\autor}[1]{
+    \author{#1}
+    \setboolean{autor}{true}
 }
 
 \newboolean{autora}
 \setboolean{autora}{false}
-\newcommand{\autora}[1]{%
-    \author{#1}%
-    \setboolean{autora}{true}%
+\newcommand{\autora}[1]{
+    \author{#1}
+    \setboolean{autora}{true}
 }
 \newcommand{\imprimirautora}{\theauthor}
 
 % Redefinição de \orientador e criação de \orientadora.
 \newboolean{orientador}
 \setboolean{orientador}{false}
-\renewcommand{\orientador}[1]{%
-    \renewcommand{\imprimirorientador}{#1}%
-    \setboolean{orientador}{true}%
+\renewcommand{\orientador}[1]{
+    \renewcommand{\imprimirorientador}{#1}
+    \setboolean{orientador}{true}
 }
 
 \newboolean{orientadora}
 \setboolean{orientadora}{false}
 \newcommand{\imprimirorientadora}{}
-\newcommand{\orientadora}[1]{%
-    \renewcommand{\imprimirorientadora}{#1}%
-    \setboolean{orientadora}{true}%
+\newcommand{\orientadora}[1]{
+    \renewcommand{\imprimirorientadora}{#1}
+    \setboolean{orientadora}{true}
 }
 
 % Redefinição de \coorientador e criação de \coorientadora.
 \newboolean{coorientador}
 \setboolean{coorientador}{false}
-\renewcommand{\coorientador}[1]{%
-    \renewcommand{\imprimircoorientador}{#1}%
-    \setboolean{coorientador}{true}%
+\renewcommand{\coorientador}[1]{
+    \renewcommand{\imprimircoorientador}{#1}
+    \setboolean{coorientador}{true}
 }
 
 \newboolean{coorientadora}
 \setboolean{coorientadora}{false}
 \newcommand{\imprimircoorientadora}{}
-\newcommand{\coorientadora}[1]{%
-    \renewcommand{\imprimircoorientadora}{#1}%
-    \setboolean{coorientadora}{true}%
+\newcommand{\coorientadora}[1]{
+    \renewcommand{\imprimircoorientadora}{#1}
+    \setboolean{coorientadora}{true}
 }
 
 % Definição da universidade e da faculdade / instituto.
@@ -173,7 +172,7 @@
 \newcommand{\universidade}[1]{\renewcommand{\imprimiruniversidade}{#1}}
 \newcommand{\imprimirinstitutooufaculdade}{}
 \newcommand{\institutooufaculdade}[1]{
-    \renewcommand{\imprimirinstitutooufaculdade}{#1}%
+    \renewcommand{\imprimirinstitutooufaculdade}{#1}
 }
 \instituicao{%
     \MakeUppercase{\imprimiruniversidade} \\%
@@ -197,8 +196,8 @@
 
 % Definição da instituição de cotutela (se houver).
 \newcommand{\imprimiruniversidadecotutela}{}
-\newcommand{\universidadecotutela}[1]{%
-    \renewcommand{\imprimiruniversidadecotutela}{#1}%
+\newcommand{\universidadecotutela}[1]{
+    \renewcommand{\imprimiruniversidadecotutela}{#1}
 }
 
 % Definição da área de concentração.
@@ -250,15 +249,7 @@
 
 % Montagem do preâmbulo.
 \preambulo{%
-    \ifthenelse{\boolean{mestrado}}{Dissertação}{}%
-    \ifthenelse{\boolean{doutorado}}{Tese}{}%
-    ~apresentada à Faculdade de Engenharia Elétrica e de Computação da Universidade Estadual de Campinas como parte dos requisitos exigidos para obtenção do título de~%
-    \ifthenelse{\boolean{mestrado}}{Mestre}{}%
-    \ifthenelse{\boolean{doutorado}}{Doutor}{}%
-    ~em Engenharia Elétrica, na Área de \imprimirareaconcentracao%
-    \ifthenelse{\boolean{cotutela}}{%
-        ~no âmbito do Acordo de Cotutela firmado entre a Unicamp e a \imprimirinstituicaocotutela
-    }.%
+    \ifthenelse{\boolean{mestrado}}{Dissertação}{}\ifthenelse{\boolean{doutorado}}{Tese}{} apresentada à Faculdade de Engenharia Elétrica e de Computação da Universidade Estadual de Campinas como parte dos requisitos exigidos para obtenção do título de \ifthenelse{\boolean{mestrado}}{Mestre}{}\ifthenelse{\boolean{doutorado}}{Doutor}{} em Engenharia Elétrica, na Área de \imprimirareaconcentracao \ifthenelse{\boolean{cotutela}}{no âmbito do Acordo de Cotutela firmado entre a Unicamp e a \imprimirinstituicaocotutela}.
 }
 
 % Estilização da folha de rosto.
@@ -328,8 +319,8 @@
     \end{center}
 }
 
-% Redefinição dos comandos relacionados à folha de rosto, uma
-% vez que não é necessário adicionar qualquer arquivo.
+% Redefinição dos comandos relacionados à folha de rosto,
+% uma vez que não é necessário adicionar qualquer arquivo.
 \renewcommand{\imprimirfolhaderostostar}{%
     \begin{folhaderosto*}
         \folhaderostocontent
@@ -349,6 +340,14 @@
 }
 \makeatother
 
+% Ficha catalográfica.
+\newcommand{\imprimirfichacatalografica}[1]{%
+    \IfFileExists{#1}{\includepdf{#1}}{%
+        \noindent%
+        Ficha catalográfica (adicionar PDF)%
+    }%
+}
+
 % Redefinição do ambiente folhadeaprovacao.
 \newcommand{\imprimirfolhaaprovacao}{}
 \renewenvironment{folhadeaprovacao}{%
@@ -358,6 +357,7 @@
 
 % Estilização da folha de aprovação.
 \renewcommand{\imprimirfolhaaprovacao}{%
+    \SingleSpacing%
     \begin{folhadeaprovacao}%
         \ABNTEXchapterfont%
         \begin{center}%
@@ -373,11 +373,11 @@
         \noindent\textbf{%
             \ifthenelse{\boolean{autora}}{Candidata: }{}%
             \ifthenelse{\boolean{autor}}{Candidato: }{}%
-        } \imprimirautor~ RA: \imprimirra%
-        \vspace{\onelineskip}%
+        } \imprimirautor~RA: \imprimirra%
+        \vspace{0.5\onelineskip}%
 
         \noindent\textbf{Data da Defesa:} \datadefesa%
-        \vspace{\onelineskip}%
+        \vspace{0.5\onelineskip}%
 
         \noindent\textbf{%
             Título da %
@@ -396,43 +396,76 @@
 
         \noindent\fontsize{12.5pt}{1.2}\selectfont{A ata de defesa, com as respectivas assinaturas dos membros da Comissão Julgadora, encontra-se no SIGA (Sistema de Fluxo de Dissertação/Tese) e na Secretaria de Pós-Graduação da Faculdade de Engenharia Elétrica e de Computação.}
     \end{folhadeaprovacao}
+    \cleardoublepage
 }
 
-% Ficha catalográfica.
-\newcommand{\imprimirfichacatalografica}[1]{%
-    \IfFileExists{#1}{\includepdf{#1}}{%
-        \noindent%
-        Ficha catalográfica (adicionar PDF)%
-    }%
+\newcommand{\imprimir}[1]{
+    \IfFileExists{#1}{%
+        \begin{#1}
+            \input{#1}%
+        \end{#1}
+    }{}
 }
 
 % Dedicatória (opcional).
-\newcommand{\incluirtex}[1]{\IfFileExists{#1}{\include{#1}}{}}
-\newcommand{\imprimirdedicatoria}[1]{\incluirtex{#1}}
-
-% Agradecimentos (opcional).
 \renewenvironment{dedicatoria}{
+    \vspace*{-\topskip}%
     \vspace*{\fill}%
-    \begin{flushright}%
+    \begin{FlushRight}%
 }{%
-    \end{flushright}%
+    \end{FlushRight}%
     \vspace*{\fill}%
+    \cleardoublepage
 }
 
-\newcommand{\imprimiragradecimentos}[1]{\incluirtex{#1}}
+\newcommand{\imprimirdedicatoria}{%
+    \imprimir{dedicatoria}
+}
+
+% Agradecimentos (opcional).
+\newcommand{\imprimiragradecimentos}{
+    \imprimir{agradecimentos}
+}
 
 % Epígrafe (opcional).
 \renewenvironment{epigrafe}{
+    \vspace*{-\topskip}%
     \vspace*{\fill}%
-    \begin{flushright}%
+    \begin{FlushRight}%
 }{%
-    \end{flushright}%
+    \end{FlushRight}%
+    \cleardoublepage
 }
 
-\newcommand{\imprimirepigrafe}[1]{\incluirtex{#1}}
+\newcommand{\imprimirepigrafe}{
+    \imprimir{epigrafe}
+}
 
 % Resumo e Abstract.
-\newcommand{\imprimirresumo}[1]{\incluirtex{#1}}
+\newcommand{\imprimirpalavraschave}{}
+\newcommand{\palavraschave}[1]{\renewcommand{\imprimirpalavraschave}{#1}}
+\newcommand{\keywords}[1]{\renewcommand{\imprimirpalavraschave}{#1}}
+
+\newcommand{\imprimirresumo}{
+    \IfFileExists{resumo}{
+        \begin{resumo}%
+            \input{resumo}%
+            \vspace{\onelineskip}%
+            \noindent%
+            \textbf{Palavras-chave}:~\imprimirpalavraschave.
+        \end{resumo}
+    }{}
+    \IfFileExists{abstract}{
+        \begin{resumo}[Abstract]
+            \begin{otherlanguage*}{english}
+                \input{abstract}%
+                \vspace{\onelineskip}%
+                \noindent%
+                \textbf{Keywords}:~\imprimirpalavraschave.
+            \end{otherlanguage*}
+        \end{resumo}
+    }{}
+}
 
 % Lista de ilustrações (opcional).
 \newcommand{\imprimirlistailustracoes}{%
@@ -478,7 +511,6 @@
     \printnomenclature%
     \cleardoublepage%
 }{}
-
 
 \makenomenclature
 

@@ -5,7 +5,7 @@
 % ATENÇÃO: a última língua declarada é a língua principal do
 % documento.
 \documentclass[
-    doutorado,              % Selecionar grau acadêmico: mestrado ou doutorado.
+    mestrado,              % Selecionar grau acadêmico: mestrado ou doutorado.
 %    cotutela,              % Remover comentário se houver cotutela.
 %    enlgish,
 %    french,
@@ -15,12 +15,15 @@
 
 % Pacotes adicionais (adicione ou remova conforme sua
 % necessidade). Visite o site https://www.ctan.org para
-% consultar outros pacotes.
+% consultar outros pacotes. Pacotes marcados com ! são,
+% em essência, desnecessários: livre-se deles!
 \usepackage{amsmath, amsfonts, amssymb}
-\usepackage{pdfpages}       % Permite importar arquivos PDF.
-\usepackage{hyperref}       % Viabiliza o uso de links internos e externos.
-\usepackage{lmodern}        % Emprega a fonte Latin Modern para o texto.
-\usepackage{subcaption}     % Inclusão de múltiplas figuras.
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{lmodern}
+\usepackage{subcaption}
+\usepackage{duckuments}     % !
+\usepackage{lipsum}         % !
 
 % Diretório onde se encontram as imagens utilizadas no trabalho.
 % O comando pode ser modificado para incluir diversos diretórios:
@@ -82,9 +85,9 @@
 \bancaexaminadora{%
     Prof. Dr. Nome do Orientador (Presidente) \\%
     Prof. Dr. Nome do Primeiro Membro \\%
-    Prof. Dr. Nome do Segundo Membro \\%
-    Prof. Dr. Nome do Terceiro Membro \\%
-    Prof. Dr. Nome do Quarto Membro
+    Prof. Dr. Nome do Segundo Membro
+    % Prof. Dr. Nome do Terceiro Membro \\%
+    % Prof. Dr. Nome do Quarto Membro
 }
 
 \begin{document}
@@ -109,10 +112,10 @@
     \imprimirfolhaderosto
     \imprimirfichacatalografica{ficha-catalografica.pdf}
     \imprimirfolhaaprovacao
-    \imprimirdedicatoria{dedicatoria}
-    \imprimiragradecimentos{agradecimentos}
-    \imprimirepigrafe{epigrafe}
-    \imprimirresumo{resumo}
+    \imprimirdedicatoria
+    \imprimiragradecimentos
+    \imprimirepigrafe
+    \imprimirresumo
     \imprimirlistailustracoes
     \imprimirlistatabelas
     \imprimirlistaabreviaturassiglassimbolos
