@@ -357,9 +357,9 @@
 
 % Estilização da folha de aprovação.
 \renewcommand{\imprimirfolhaaprovacao}{%
-    \SingleSpacing%
     \begin{folhadeaprovacao}%
         \ABNTEXchapterfont%
+        \SingleSpacing%
         \begin{center}%
             \textbf{%
                 COMISSÃO JULGADORA - %
@@ -389,12 +389,14 @@
 
         \noindent%
         \begin{minipage}[c]{\textwidth}%
-            \imprimirbancaexaminadora%
+            \imprimirbancaexaminadora
         \end{minipage}
 
         \vspace{2cm}
 
-        \noindent\fontsize{12.5pt}{1.2}\selectfont{A ata de defesa, com as respectivas assinaturas dos membros da Comissão Julgadora, encontra-se no SIGA (Sistema de Fluxo de Dissertação/Tese) e na Secretaria de Pós-Graduação da Faculdade de Engenharia Elétrica e de Computação.}
+        \noindent%
+        \fontsize{12.5pt}{1.2}\selectfont{A ata de defesa, com as respectivas assinaturas dos membros da Comissão Julgadora, encontra-se no SIGA (Sistema de Fluxo de Dissertação/Tese) e na Secretaria de Pós-Graduação da Faculdade de Engenharia Elétrica e de Computação.}
+
     \end{folhadeaprovacao}
     \cleardoublepage
 }
