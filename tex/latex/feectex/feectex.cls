@@ -22,7 +22,6 @@
 
 \RequirePackage{ifthen}
 
-% As opções exclusivas desta classe são processadas abaixo.
 \newboolean{mestrado}
 \setboolean{mestrado}{false}
 \newboolean{doutorado}
@@ -41,20 +40,30 @@
 }
 
 % Por se tratar de texto de dissertação / tese, as opções
-% article e twocolumn são desabilitadas por padrão.
-\DeclareOption{article}{%
-    \ClassError{feec-unicamp}{%
-        Não é possível usar esta classe para escrever artigo.%
-    }{%
-        A classe feec-unicamp deve ser utilizada para redação da dissertação de mestrado ou tese de doutorado apenas.
+% article e twocolumn são desabilitadas por padrão. Deste
+% modo, o usuário é informado sobre o erro caso ele venha
+% a declarar ao menos uma destas opções.
+\DeclareOption{article}{
+    \ClassError{feectex}{
+        Não é possível usar esta classe para escrever artigo.
+    }{
+        A classe feectex deve ser utilizada para redação da dissertação de mestrado ou tese de doutorado apenas.
     }
 }
 
-\DeclareOption{twocolumn}{%
-    \ClassError{feec-unicamp}{%
-        Não é possível usar esta classe para escrever o texto em duas colunas.%
-    }{%
-        O texto da dissertação de mestrado e a tese de doutorado deve ser escrito utilizando uma coluna.
+\DeclareOption{twocolumn}{
+    \ClassError{feectex}{
+        Não é possível usar esta classe para escrever o texto em duas colunas.
+    }{
+        O texto da dissertação de mestrado e a tese de doutorado deve ser escrito em uma única coluna (que ocupa todo espaço disponível para o texto).
+    }
+}
+
+\DeclareOption{a5paper}{
+    \ClassError{feectex}{
+        O texto final deve ser apresentado em papel A4.
+    }{
+        O padrão A4 já está configurado na classe feectex. Remova a opção a5paper em sua declaração de classe do documento.
     }
 }
 
@@ -64,15 +73,15 @@
     12pt,               % Tamanho da fonte: 11pt ou 12pt.
     openright,          % Capítulos começam em páginas ímpares sempre.
     oneside,            % Impres. verso (oneside) ou verso / anverso (twoside).
-    a4paper,            % Tamanho do papel: a4paper, a5paper.
+    a4paper,
     sumario=tradicional % Estilo do sumário: tradicional ou abnt-6027-2012.
 ]{abntex2}
 
 % Pacotes.
-\RequirePackage[T1]{fontenc}    % Imprime (output) caracteres acentuados.
-\RequirePackage[utf8]{inputenc} % Permite usar (input) caracteres acentuados.
-\RequirePackage{ragged2e}
+\RequirePackage[T1]{fontenc}    % Output (impressão) de caracteres acentuados.
+\RequirePackage[utf8]{inputenc} % Input de caracteres acentuados.
 \RequirePackage{indentfirst}
+\RequirePackage{lmodern}
 \RequirePackage{nomencl}
 \RequirePackage[
     alf,
@@ -85,6 +94,7 @@
 \setlrmarginsandblock{3cm}{2cm}{*}  % \setlrmarginsandblock{esquerda}{direita}
 \setulmarginsandblock{3cm}{2cm}{*}  % \setulmarginsandblock{superior}{inferior}
 \checkandfixthelayout
+
 \setlength{\parindent}{2cm}
 \frenchspacing
 
@@ -209,40 +219,37 @@
 \newcommand{\bancaexaminadora}[1]{\renewcommand{\imprimirbancaexaminadora}{#1}}
 
 % Estilização da capa.
+\newlength{\espacotitulo}
+\setlength{\espacotitulo}{\textwidth}
+\newcommand{\ajustetitulo}[1]{\setlength{\espacotitulo}{#1\textwidth}}
+
 \renewcommand{\imprimircapa}{%
-    \begin{capa}%
-        \noindent%
-        \begin{minipage}{0.1\textwidth}%
-            \includegraphics[width=1.5cm]{%
-                generic/images/unicamp-logotipo%
-            }%
-        \end{minipage}%
-        \hspace*{\fill}%
-        \begin{minipage}{0.86\textwidth}%
-            \centering\ABNTEXchapterfont\large\imprimirinstituicao%
-        \end{minipage}%
+    \begin{capa}
+        \begin{center}
+            \begin{minipage}{0.1\textwidth}%
+                \centering%
+                \includegraphics[width=1.5cm]{generic/images/unicamp-logotipo}
+            \end{minipage}%
+            \begin{minipage}{0.9\textwidth}%
+                \centering%
+                \ABNTEXchapterfont\large\imprimirinstituicao
+            \end{minipage}
+            \vspace{3cm}
 
-        \vspace{3cm}
+            \ABNTEXchapterfont\large%
+            \ifthenelse{\boolean{autora}}{\imprimirautora}{}%
+            \ifthenelse{\boolean{autor}}{\imprimirautor}{}
+            \vspace{\fill}
 
-        \begin{center}%
-            \noindent{%
-                \ABNTEXchapterfont\large%
-                \ifthenelse{\boolean{autora}}{\imprimirautora}{}%
-                \ifthenelse{\boolean{autor}}{\imprimirautor}{}%
-            }%
-            \vfill%
+            \begin{minipage}{\espacotitulo}%
+                \centering%
+                {\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo}
+            \end{minipage}
+            \vspace*{\fill}
 
-            \begin{center}%
-                \begin{minipage}{0.95\textwidth}%
-                    \centering%
-                    {\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo}%
-                \end{minipage}
-            \end{center}
-
-            \vfill%
-
-            \noindent{\ABNTEXchapterfont\large\imprimirlocal} \\%
-            {\ABNTEXchapterfont\large\ano}%
+            \SingleSpacing%
+            \ABNTEXchapterfont\large\imprimirlocal \\%
+            \ABNTEXchapterfont\large\ano
         \end{center}
     \end{capa}
 }
@@ -259,81 +266,67 @@
         \noindent{%
             \ABNTEXchapterfont\large%
             \ifthenelse{\boolean{autora}}{\imprimirautora}{}%
-            \ifthenelse{\boolean{autor}}{\imprimirautor}{}%
-        }%
+            \ifthenelse{\boolean{autor}}{\imprimirautor}{}
+        }
+        \vspace{\fill}
 
-        \vspace*{\fill}%
+        \begin{minipage}{\espacotitulo}%
+            \centering%
+            {\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo}%
+        \end{minipage}
+    \end{center}
+    \vspace*{\fill}
 
-        \begin{center}%
-            \begin{minipage}{0.95\textwidth}%
-                \centering%
-                {\ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo}%
-            \end{minipage}
-        \end{center}
-    \end{center}%
-
-    \vspace*{\fill}%
-
-    \hspace{\fill}%
-    \begin{minipage}{.55\textwidth}%
-        \ABNTEXchapterfont\textit{\imprimirpreambulo}%
-    \end{minipage}%
-
+    \begin{flushright}%
+        \begin{minipage}{.55\textwidth}%
+            \ABNTEXchapterfont\textit{\imprimirpreambulo}
+        \end{minipage}
+    \end{flushright}
     \vspace{1cm}
 
-    \noindent%
-    \ABNTEXchapterfont\large%
-    \ifthenelse{\boolean{orientadora}}{Orientadora: \imprimirorientadora}{}%
-    \ifthenelse{\boolean{orientador}}{Orientador: \imprimirorientador}{}%
+    \begin{flushleft}
+        \ABNTEXchapterfont\large%
+        \ifthenelse{\boolean{orientadora}}{Orientadora: \imprimirorientadora}{}%
+        \ifthenelse{\boolean{orientador}}{Orientador: \imprimirorientador}{}%
 
-    \noindent%¨
-    \ifthenelse{\boolean{coorientadora}}{Coorientadora: \imprimircoorientadora}{}%
-    \ifthenelse{\boolean{coorientador}}{Coorientador: \imprimircoorientador}{}%
+        \ifthenelse{\boolean{coorientadora}}{%
+            Coorientadora: \imprimircoorientadora%
+        }{}%
+        \ifthenelse{\boolean{coorientador}}{%
+            Coorientador: \imprimircoorientador%
+        }{}
+        \vspace{2cm}
 
-    \vspace{1.5cm}
+        \begin{minipage}{.45\textwidth}%
+            \tiny%
+            ESTE TRABALHO CORRESPONDE À VERSÃO FINAL DA \ifthenelse{\boolean{mestrado}}{DISSERTAÇÃO}{}\ifthenelse{\boolean{doutorado}}{TESE}{} DEFENDIDA \ifthenelse{\boolean{autora}}{PELA ALUNA \MakeUppercase{\imprimirautora}}{}\ifthenelse{\boolean{autor}}{PELO ALUNO \MakeUppercase{\imprimirautor}}{}, E ORIENTADA \ifthenelse{\boolean{orientadora}}{PELA \MakeUppercase{\imprimirorientadora}}{}\ifthenelse{\boolean{orientador}}{PELO \MakeUppercase{\imprimirorientador}}{}
+        \end{minipage}
+    \end{flushleft}
+    \vspace{\fill}
 
-    \noindent%
-    \begin{minipage}{.45\textwidth}%
-        \tiny\justifying\noindent ESTE TRABALHO CORRESPONDE À VERSÃO FINAL DA~%
-        \ifthenelse{\boolean{mestrado}}{DISSERTAÇÃO}{}%
-        \ifthenelse{\boolean{doutorado}}{TESE}{}%
-        ~DEFENDIDA~%
-        \ifthenelse{\boolean{autora}}{%
-            PELA ALUNA \MakeUppercase{\imprimirautora}%
-        }{}%
-        \ifthenelse{\boolean{autor}}{%
-            PELO ALUNO \MakeUppercase{\imprimirautor}%
-        }{}%
-        , E ORIENTADA~%
-        \ifthenelse{\boolean{orientadora}}{%
-            PELA \MakeUppercase{\imprimirorientadora}%
-        }{}%
-        \ifthenelse{\boolean{orientador}}{%
-            PELO \MakeUppercase{\imprimirorientador}%
-        }{}%
-    \end{minipage}\vfill%
-
-    \begin{center}%
-        {\ABNTEXchapterfont\large\imprimirlocal} \\%
-        {\ABNTEXchapterfont\large\ano}%
+    \begin{center}
+        \SingleSpacing%
+        \ABNTEXchapterfont\large\imprimirlocal \\%
+        \ABNTEXchapterfont\large\ano
     \end{center}
 }
 
 % Redefinição dos comandos relacionados à folha de rosto,
 % uma vez que não é necessário adicionar qualquer arquivo.
 \renewcommand{\imprimirfolhaderostostar}{%
-    \begin{folhaderosto*}
+    \begin{folhaderosto*}%
         \folhaderostocontent
     \end{folhaderosto*}
 }
 
 \renewcommand{\imprimirfolhaderostonostar}{%
-    \begin{folhaderosto}
+    \begin{folhaderosto}%
         \folhaderostocontent
-\end{folhaderosto}}
+    \end{folhaderosto}
+}
 
 \makeatletter
-\renewcommand{\imprimirfolhaderosto}{%
+\renewcommand{\imprimirfolhaderosto}{
     \@ifstar
         \imprimirfolhaderostostar
         \imprimirfolhaderostonostar
@@ -367,36 +360,34 @@
                 \ifthenelse{\boolean{doutorado}}{TESE DE DOUTORADO}{}%
             }%
         \end{center}
-
         \vspace{2cm}
 
-        \noindent\textbf{%
-            \ifthenelse{\boolean{autora}}{Candidata: }{}%
-            \ifthenelse{\boolean{autor}}{Candidato: }{}%
-        } \imprimirautor~RA: \imprimirra%
-        \vspace{0.5\onelineskip}%
+        \begin{flushleft}
+            \textbf{%
+                \ifthenelse{\boolean{autora}}{Candidata: }{}%
+                \ifthenelse{\boolean{autor}}{Candidato: }{}%
+            } \imprimirautor~RA: \imprimirra%
+            \vspace{0.5\onelineskip}%
 
-        \noindent\textbf{Data da Defesa:} \datadefesa%
-        \vspace{0.5\onelineskip}%
+            \textbf{Data da Defesa:} \datadefesa%
+            \vspace{0.5\onelineskip}%
 
-        \noindent\textbf{%
-            Título da %
-            \ifthenelse{\boolean{mestrado}}{Dissertação:}{}%
-            \ifthenelse{\boolean{doutorado}}{Tese:}{}%
-        }~\imprimirtitulo%
+            \textbf{%
+                Título da %
+                \ifthenelse{\boolean{mestrado}}{Dissertação:}{}%
+                \ifthenelse{\boolean{doutorado}}{Tese:}{}%
+            }~\imprimirtitulo%
+            \vspace{2cm}
 
-        \vspace{2cm}
+            \begin{minipage}[c]{\textwidth}%
+                \imprimirbancaexaminadora
+            \end{minipage}
+            \vspace{2cm}
 
-        \noindent%
-        \begin{minipage}[c]{\textwidth}%
-            \imprimirbancaexaminadora
-        \end{minipage}
-
-        \vspace{2cm}
-
-        \noindent%
-        \fontsize{12.5pt}{1.2}\selectfont{A ata de defesa, com as respectivas assinaturas dos membros da Comissão Julgadora, encontra-se no SIGA (Sistema de Fluxo de Dissertação/Tese) e na Secretaria de Pós-Graduação da Faculdade de Engenharia Elétrica e de Computação.}
-
+            \begin{minipage}{\textwidth}%
+                \fontsize{12.5pt}{14pt}\selectfont{A ata de defesa, com as respectivas assinaturas dos membros da Comissão Julgadora, encontra-se no SIGA (Sistema de Fluxo de Dissertação/Tese) e na Secretaria de Pós-Graduação da Faculdade de Engenharia Elétrica e de Computação.}
+            \end{minipage}
+        \end{flushleft}
     \end{folhadeaprovacao}
     \cleardoublepage
 }
@@ -413,9 +404,9 @@
 \renewenvironment{dedicatoria}{
     \vspace*{-\topskip}%
     \vspace*{\fill}%
-    \begin{FlushRight}%
+    \begin{flushright}%
 }{%
-    \end{FlushRight}%
+    \end{flushright}%
     \vspace*{\fill}%
     \cleardoublepage
 }
@@ -431,11 +422,10 @@
 
 % Epígrafe (opcional).
 \renewenvironment{epigrafe}{
-    \vspace*{-\topskip}%
     \vspace*{\fill}%
-    \begin{FlushRight}%
+    \begin{flushright}%
 }{%
-    \end{FlushRight}%
+    \end{flushright}%
     \cleardoublepage
 }
 

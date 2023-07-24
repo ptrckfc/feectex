@@ -13,7 +13,13 @@ Considerando que as referências estejam armazenadas no arquivo \textit{bibliogr
     \item \verb|\citarano{<chave>}|.
 \end{itemize}
 
-\noindent Exemplos: \verb|\citar{autor, autora}| produz \citar{autor, autora}. \verb|\citar| \verb|autora{autora}| produz \citarautora{autora}; \verb|\citarano{autora/autor}| produz \citarano{autora}.
+Exemplos:
+
+\begin{itemize}
+    \item \verb|\citar{autor, autora}| produz \citar{autor, autora};
+    \item \verb|\citar| \verb|autora{autora}| produz \citarautora{autora};
+    \item \verb|\citarano{autora}| produz \citarano{autora}.
+\end{itemize}
 
 \section{Notas de Rodapé}
 
@@ -21,19 +27,33 @@ As notas de rodapé são declaradas através do comando \verb|\footnote{<nota>}|
 
 \section{Abreviaturas e siglas}
 
-A lista de abreviaturas e siglas é gerada automaticamente. Para que isso aconteça, basta que os comandos \verb|\abreviatura{<abreviatura>}| \verb|{<definição>}|, \verb|\sigla| \verb|{<sigla>}{<definição>}| sejam encontrados durante a preparação do documento PDF.
+A lista de abreviaturas e siglas é gerada automaticamente. Para que isso aconteça, basta que os comandos \verb|\abreviatura{<abreviatura>}|\verb|{<definição>}|, \verb|\sigla| \verb|{<sigla>}{<definição>}| sejam encontrados durante a preparação do documento PDF.
 
-Exemplos: \verb|\sigla{ABNT}{Associação Brasileira de Normas Técnicas}| e \verb|\abreviatura{Dr.}{Doutor}| produzem a sigla e a abreviatura listadas na lista de abreviaturas e símbolos.\sigla{ABNT}{Associação Brasileira de Normas Técnicas} \abreviatura{Dr.}{Doutor}
+Exemplos:
+
+\begin{itemize}
+    \item \verb|\sigla{ABNT}{Associação Brasileira de Normas Técnicas}|
+    \item \verb|\abreviatura{Dr.}{Doutor}|
+\end{itemize}
+
+\sigla{ABNT}{Associação Brasileira de Normas Técnicas}
+\abreviatura{Dr.}{Doutor}
 
 \section{Símbolos}
 
 Assim como lista de abreviaturas e siglas, a lista de símbolos também é gerada automaticamente. Da mesma maneira, basta que o comando \verb|\simbolo<símbolo>}| \verb|{<definição>}| seja encontrado ao longo da preparação do documento PDF para que isso aconteça.
 
-Exemplo: \verb|\simbolo{$\mathbb{R}$}{Conjunto dos números reais}| produz o símbolo listado na lista de símbolos. \simbolo{$\mathbb{R}$}{Conjunto dos números reais}
+Exemplo:
+
+\begin{itemize}
+    \item \verb|\simbolo{$\mathbb{R}$}{Conjunto dos números reais}|
+\end{itemize}
+
+\simbolo{$\mathbb{R}$}{Conjunto dos números reais}
 
 \section{Tabelas}
 
-\begin{table}
+\begin{table}[h]
     \centering
     \begin{tabular}{c | c}
         \hline
@@ -56,28 +76,26 @@ O tamanho das imagens pode ser escolhido através dos comandos \verb|width| e \v
     \caption[Galáxia M33]{Galáxia do Triângulo M33.}
 \end{figure}
 
-% \begin{figure}
-%     \centering
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{graph1}
-%         \caption{$y=x$}
-%         \label{fig:y equals x}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{graph2}
-%         \caption{$y=3\sin x$}
-%         \label{fig:three sin x}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{graph3}
-%         \caption{$y=5/x$}
-%         \label{fig:five over x}
-%     \end{subfigure}
-%        \caption{Three simple graphs}
-%        \label{fig:three graphs}
-% \end{figure}
+\subsection{Múltiplas figuras}
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{example-image-duck}
+        \caption{Primeiro pato.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{example-image-duck}
+        \caption{Segundo pato.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{example-image-duck}
+        \caption{Terceiro pato.}
+    \end{subfigure}
+       \caption{Três patos juntos.}
+\end{figure}

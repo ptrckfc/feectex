@@ -6,7 +6,7 @@ A presente implementação segue a **Instrução Normativa CCPG Nº 002/2021** d
 
 FEECTeX é elaborada a partir da classe abnTeX2 ([site](https://www.abntex.net.br) / [GitHub](https://www.github.com/abntex)).
 
-A classe é implementada com o mínimo necessário para a escrita da tese ou dissertação. Junto com a classe é fornecido um _template_ de tese / dissertação, o qual pode ser utilizado como ponto de partida para a escrita de um novo trabalho.
+A classe é implementada com o objetivo de propiciar ao aluno a escrita do texto final sem (muitas) preocupações. Junto com a classe é fornecido um _template_ de tese / dissertação, o qual pode ser utilizado como ponto de partida para a escrita de um novo trabalho.
 
 ## Isenção de Responsabilidade
 
