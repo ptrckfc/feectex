@@ -20,7 +20,7 @@ Abra o arquivo `principal.tex` e preencha as informações necessárias.
 
 Na declaração `\documentclass{...}`, diga se o trabalho é `mestrado` ou `doutorado`. Se o trabalho foi realizado em cotutela, informe isto na mesma declaração (basta remover o comentário). Por fim, se o trabalho não foi escrito em português, coloque como última opção a língua principal do documento. (ATENÇÃO: na atual versão, o FEECTeX não preenche as informações em língua estrangeira.)
 
-Em seguida, informe o título da obra (`\titulo{}`). Se o título ocupar mais de uma linha (o que é bastante comum) e for necessário ajustar sua exibição na capa e na folha de rosto, **não** utilize o comando `\\`. Utilize o comando `\ajustetitulo{<valor>}` implementado na classe FEECTeX, onde `<valor>` é um número entre 0 e 1 (e.g., 0.9).
+Em seguida, informe o título da obra (`\titulo{}`). Se o título ocupar mais de uma linha (o que é bastante comum) e for necessário ajustar sua exibição na capa e na folha de rosto, **não** utilize o comando `\\`. Faça uso do comando `\ajustetitulo{<valor>}` implementado na classe FEECTeX, onde `<valor>` é um número entre 0 e 1 (e.g., 0.9). `\ajustetitulo{}` pode ser declarado no arquivo `principal.tex` logo abaixo de `\titulo{}`.
 
 Preencha, então, o seu nome, o número do seu RA, o título e o nome de sua orientadora / seu orientador, o título e o nome de sua coorientadora / seu coorientador (se não houver, comente ambas as linhas), a universidade, o instituto ou faculdade, a universidade onde foi realizada a cotutela (se não houver, comente a linha), o local da defesa; o dia, o mẽs e o ano da defesa; a área de concentração; e, por fim, os títulos e os nomes dos componentes da banca examinadora.
 
