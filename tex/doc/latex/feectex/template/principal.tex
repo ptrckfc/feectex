@@ -7,7 +7,7 @@
 \documentclass[
     mestrado,              % Selecionar grau acadêmico: mestrado ou doutorado.
 %    cotutela,              % Remover comentário se houver cotutela.
-%    enlgish,
+%    english,
 %    french,
 %    spanish,
     brazil
@@ -17,11 +17,17 @@
 % necessidade). Visite o site https://www.ctan.org para
 % consultar outros pacotes. Pacotes marcados com ! são,
 % em essência, desnecessários: livre-se deles!
+\usepackage{indentfirst}
+\usepackage{lmodern}
 \usepackage{amsmath, amsfonts, amssymb}
-\usepackage{pdfpages}
-\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage[
+    alf,
+    abnt-etal-cite=2,
+    abnt-etal-list=0,
+    abnt-etal-text=emph
+]{abntex2cite}
 \usepackage{duckuments}     % !
 \usepackage{lipsum}         % !
 
@@ -37,6 +43,11 @@
 % Qual é o título da obra?
 \titulo{Título da Obra}
 
+% Quais são as palavras-chave, em português e em inglês,
+% relacionadas ao trabalho?
+\palavraschave{latex, abntex, editoração de texto}
+\keywords{latex, abntex, text editing}
+
 % Quais são o seu nome e o número do seu RA?
 \autora{Nome da Autora}
 %\autor{Nome do Autor}
@@ -50,10 +61,6 @@
 % Se não houver, comente ambas as linhas abaixo.
 % \coorientadora{Profa. Dra. Nome da Coorientadora}
 \coorientador{Prof. Dr. Nome do Coorientador}
-
-% Quais são a universidade e o instituto ou faculdade?
-\universidade{Universidade Estadual de Campinas}
-\institutooufaculdade{Faculdade de Engenharia Elétrica e de Computação}
 
 % Qual é o nome da universidade de cotutela? Se houver,
 % modificar a opção na declaração da classe acima
@@ -94,21 +101,7 @@
 \begin{document}
     % \hyphenation{}
 
-    % Elementos pré-textuais:
-    %   capa;
-    %   folha de rosto;
-    %   ficha catalográfica;
-    %   folha de aprovação;
-    %   dedicatoria;
-    %   agradecimentos;
-    %   epigrafe;
-    %   resumo / abstract;
-    %   lista de ilustrações;
-    %   lista de tabelas;
-    %   lista de abreviaturas e siglas;
-    %   lista de simbolos;
-    %   sumário.
-    % Comente os elementos não utilizados no seu trabalho.
+    % Elementos pré-textuais.
     \imprimircapa
     \imprimirfolhaderosto
     \imprimirfichacatalografica{ficha-catalografica.pdf}
@@ -119,23 +112,25 @@
     \imprimirresumo
     \imprimirlistailustracoes
     \imprimirlistatabelas
-    \imprimirlistaabreviaturassiglassimbolos
+    \imprimirlistaabreviaturassiglas
+    \imprimirlistasimbolos
     \imprimirsumario
 
     % Elementos textuais.
     \textual
     \part{Primeira Parte}
-    \include{capitulos/capitulo-1}
+    \incluir{capitulos/capitulo-1}
 
-    % Elementos pós-textuais:
-    %   bibliografia / referências;
-    %   apêndices;
-    %   asnexos.
-    % Comente os elementos não utilizados no seu trabalho.
+    % Elementos pós-textuais.
     \postextual
-    \bibliography{bibliografia}
+    \imprimirbibliografia{bibliografia}
+
     \apendices
-    \include{apendices/apendice-A}
+    \partapendices
+    \incluir{apendices/apendice-A}
+
     \anexos
-    \include{anexos/anexo-A}
+    \partanexos
+    \incluir{anexos/anexo-A}
+
 \end{document}

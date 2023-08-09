@@ -18,7 +18,7 @@
 %!TeX encoding = UTF-8
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{feectex}[2023/07/19 v1.0.0 Classe FEEC / Unicamp]
+\ProvidesClass{feectex}[2023/08/04 v1.2.0 Classe FEEC / Unicamp]
 
 \RequirePackage{ifthen}
 
@@ -80,15 +80,6 @@
 % Pacotes.
 \RequirePackage[T1]{fontenc}    % Output (impressão) de caracteres acentuados.
 \RequirePackage[utf8]{inputenc} % Input de caracteres acentuados.
-\RequirePackage{indentfirst}
-\RequirePackage{lmodern}
-\RequirePackage{nomencl}
-\RequirePackage[
-    alf,
-    abnt-etal-cite=2,
-    abnt-etal-list=0,
-    abnt-etal-text=emph
-]{abntex2cite}
 
 % Configuração das margens, do parágrafo e do texto.
 \setlrmarginsandblock{3cm}{2cm}{*}
@@ -110,19 +101,30 @@
 % somado ao valor de \leftskip (de 1 cm, aparentemente).
 \setlength{\ABNTEXcitacaorecuo}{4cm}
 
+\renewcommand{\pretextual}{
+    \pagestyle{empty}
+    \aliaspagestyle{chapter}{empty}
+    \aliaspagestyle{cleared}{empty}
+    \aliaspagestyle{part}{empty}
+}
+
+% O comando abaixo remove a numeração do sumário. ATENÇÃO:
+% aparentemente, o comando só funciona com a opção "oneside"
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{empty}}}
+
 % Refação do \textual para correta enumeração das páginas.
-\renewcommand{\textual}{%
-    \addtocounter{page}{1}%
-    \pagestyle{abntheadings}%
-    \aliaspagestyle{part}{abntchapfirst}%
-    \aliaspagestyle{chapter}{abntchapfirst}%
-    \aliaspagestyle{cleared}{abntchapfirst}%
-    \nouppercaseheads%
-    \bookmarksetup{startatroot}%
+\renewcommand{\textual}{
+    \addtocounter{page}{1}
+    \pagestyle{abntheadings}
+    \aliaspagestyle{part}{abntchapfirst}
+    \aliaspagestyle{chapter}{abntchapfirst}
+    \aliaspagestyle{cleared}{abntchapfirst}
+    \nouppercaseheads
+    \bookmarksetup{startatroot}
 }
 
 % Implementações e reimplementações exclusivas da classe.
-\newcommand{\feectex}{\textit{feectex}~}
+\newcommand{\feectex}{feec\TeX~}
 
 % Registro acadêmico (RA).
 \newcommand{\imprimirra}{}
@@ -179,14 +181,17 @@
 % Definição da universidade e da faculdade / instituto.
 \newcommand{\imprimiruniversidade}{}
 \newcommand{\universidade}[1]{\renewcommand{\imprimiruniversidade}{#1}}
-\newcommand{\imprimirinstitutooufaculdade}{}
-\newcommand{\institutooufaculdade}[1]{
-    \renewcommand{\imprimirinstitutooufaculdade}{#1}
+\newcommand{\imprimirfaculdade}{}
+\newcommand{\faculdade}[1]{
+    \renewcommand{\imprimirfaculdade}{#1}
 }
 \instituicao{%
     \MakeUppercase{\imprimiruniversidade} \\%
-    \imprimirinstitutooufaculdade%
+    \imprimirfaculdade%
 }
+
+\universidade{Universidade Estadual de Campinas}
+\faculdade{Faculdade de Engenharia Elétrica e de Computação}
 
 % Definição da data de defesa. O ano que aparece na capa e
 % na folha de rosto é o ano da defesa.
@@ -338,6 +343,7 @@
         \noindent%
         Ficha catalográfica (adicionar PDF)%
     }%
+    \cleardoublepage
 }
 
 % Redefinição do ambiente folhadeaprovacao.
@@ -401,6 +407,7 @@
 
 % Dedicatória (opcional).
 \renewenvironment{dedicatoria}{
+    \pdfbookmark[0]{Dedicatória}{ded}
     \vspace*{-\topskip}%
     \vspace*{\fill}%
     \begin{flushright}%
@@ -421,6 +428,7 @@
 
 % Epígrafe (opcional).
 \renewenvironment{epigrafe}{
+    \pdfbookmark[0]{Epígrafe}{epi}
     \vspace*{\fill}%
     \begin{flushright}%
 }{%
@@ -441,6 +449,7 @@
     \IfFileExists{resumo}{
         \begin{resumo}%
             \input{resumo}%
+
             \vspace{\onelineskip}%
             \noindent%
             \textbf{Palavras-chave}:~\imprimirpalavraschave.
@@ -450,6 +459,7 @@
         \begin{resumo}[Abstract]
             \begin{otherlanguage*}{english}
                 \input{abstract}%
+
                 \vspace{\onelineskip}%
                 \noindent%
                 \textbf{Keywords}:~\imprimirpalavraschave.
@@ -472,52 +482,38 @@
     \cleardoublepage
 }
 
-% Lista de abreviaturas e siglas (opcional) e lista de
-% símbolos (opcional).
-\renewcommand{\nomname}{}%
-\newcommand{\abreviatura}[1]{\nomenclature[A]{#1}}
-\newcommand{\sigla}[1]{\nomenclature[A]{#1}}
-\newcommand{\simbolo}[1]{\nomenclature[S]{#1}}
-
-\renewcommand{\nomgroup}[1]{
-    \item[]%
-    \ifthenelse{\equal{#1}{A}}{%
-        \pdfbookmark[0]{\listadesiglasname}{las}%
-        \begin{center}%
-            {\printchaptertitle\listadesiglasname}%
-        \end{center}%
-        \vspace*{1cm}%
-    }{}%
-    \ifthenelse{\equal{#1}{S}}{%
-        \cleardoublepage%
-        \pdfbookmark[0]{\listadesimbolosname}{los}%
-        \begin{center}%
-            {\printchaptertitle\listadesimbolosname}%
-        \end{center}%
-        \vspace*{0.5cm}%
-    }{}%
+% Lista de abreviaturas e siglas (opcional)
+\newcommand{\imprimirlistaabreviaturassiglas}{%
+    \IfFileExists{abreviaturas-siglas}{%
+        \begin{siglas}%
+            \input{abreviaturas-siglas}%
+        \end{siglas}
+    }{}
 }
 
-\newcommand{\imprimirlistaabreviaturassiglassimbolos}{%
-    \printnomenclature%
-    \cleardoublepage%
-}{}
-
-\makenomenclature
+% Lista de % símbolos (opcional).
+\newcommand{\imprimirlistasimbolos}{%
+    \IfFileExists{simbolos}{%
+    \begin{simbolos}%
+        \input{simbolos}
+    \end{simbolos}
+    }{}
+}
 
 % Sumário.
 \newcommand{\imprimirsumario}{%
     \pdfbookmark[0]{\contentsname}{toc}
     \tableofcontents*
-    \clearpage
 }
 
 % Estilização dos elementos pós-textuais.
-\newcommand{\imprimirreferencias}[1]{%
-    \IfFileExists{#1}{\bibliography{#1}}{}%
-}
 \newcommand{\imprimirbibliografia}[1]{%
-    \imprimirreferencias{#1}
+    \bibliography{#1}%
+}
+
+% Novo comando para inclusão de arquivos .tex
+\newcommand{\incluir}[1]{%
+    \IfFileExists{#1}{\include{#1}}{}
 }
 
 % Novos comandos para citações.
