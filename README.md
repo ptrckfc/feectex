@@ -77,6 +77,7 @@ Também foram criadas as versões em português para outros comandos. Veja abaix
 
 * Remove o pacote `nomencl` e a geração automática da _Lista de Abreviaturas e Siglas_ e da _Lista de Símbolos_.
 * Corrige numeração na página do Sumário.
+* Corrige numeração das páginas no "bookmark".
 * Indica início dos Apêndice (`\partapendices`) e dos Anexos (`\partanexos`).
 
 ## Isenção de Responsabilidade
