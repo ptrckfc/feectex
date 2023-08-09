@@ -18,7 +18,7 @@
 %!TeX encoding = UTF-8
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{feectex}[2023/08/04 v1.2.0 Classe FEEC / Unicamp]
+\ProvidesClass{feectex}[2023/08/09 v2.0.0 Classe FEEC / Unicamp]
 
 \RequirePackage{ifthen}
 
@@ -80,6 +80,12 @@
 % Pacotes.
 \RequirePackage[T1]{fontenc}    % Output (impressão) de caracteres acentuados.
 \RequirePackage[utf8]{inputenc} % Input de caracteres acentuados.
+\RequirePackage[
+    alf,
+    abnt-etal-cite=2,
+    abnt-etal-list=0,
+    abnt-etal-text=emph
+]{abntex2cite}
 
 % Configuração das margens, do parágrafo e do texto.
 \setlrmarginsandblock{3cm}{2cm}{*}
@@ -101,15 +107,9 @@
 % somado ao valor de \leftskip (de 1 cm, aparentemente).
 \setlength{\ABNTEXcitacaorecuo}{4cm}
 
-\renewcommand{\pretextual}{
-    \pagestyle{empty}
-    \aliaspagestyle{chapter}{empty}
-    \aliaspagestyle{cleared}{empty}
-    \aliaspagestyle{part}{empty}
-}
-
-% O comando abaixo remove a numeração do sumário. ATENÇÃO:
-% aparentemente, o comando só funciona com a opção "oneside"
+% O comando abaixo remove a numeração do sumário.
+% ATENÇÃO: aparentemente, o comando só funciona com a opção
+% "oneside"
 \AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{empty}}}
 
 % Refação do \textual para correta enumeração das páginas.
