@@ -15,7 +15,7 @@
 %
 % This work consists of the file feectex.cls.
 
-%!TeX encoding = UTF-8
+%!TeX encoding = utf-8
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{feectex}[2023/08/09 v2.0.0 Classe FEEC / Unicamp]
@@ -114,7 +114,6 @@
 
 % Refação do \textual para correta enumeração das páginas.
 \renewcommand{\textual}{
-    \addtocounter{page}{1}
     \pagestyle{abntheadings}
     \aliaspagestyle{part}{abntchapfirst}
     \aliaspagestyle{chapter}{abntchapfirst}
@@ -263,6 +262,11 @@
     \ifthenelse{\boolean{mestrado}}{Dissertação}{}\ifthenelse{\boolean{doutorado}}{Tese}{} apresentada à Faculdade de Engenharia Elétrica e de Computação da Universidade Estadual de Campinas como parte dos requisitos exigidos para obtenção do título de \ifthenelse{\boolean{mestrado}}{Mestre}{}\ifthenelse{\boolean{doutorado}}{Doutor}{} em Engenharia Elétrica, na Área de \imprimirareaconcentracao \ifthenelse{\boolean{cotutela}}{no âmbito do Acordo de Cotutela firmado entre a Unicamp e a \imprimirinstituicaocotutela}.
 }
 
+\newcommand{\marcar}[1]{
+    \addtocounter{abntex@bookmarkcounter}{1}%
+    \phantomsection\pdfbookmark[0]{#1}{chapterb\arabic{abntex@bookmarkcounter}}
+}
+
 % Estilização da folha de rosto.
 \renewcommand{\folhaderostocontent}{%
     \SingleSpacing%
@@ -331,6 +335,7 @@
 
 \makeatletter
 \renewcommand{\imprimirfolhaderosto}{
+    \addtocounter{page}{1}
     \@ifstar
         \imprimirfolhaderostostar
         \imprimirfolhaderostonostar
@@ -339,6 +344,7 @@
 
 % Ficha catalográfica.
 \newcommand{\imprimirfichacatalografica}[1]{%
+    \marcar{Ficha catalográfica}
     \IfFileExists{#1}{\includepdf{#1}}{%
         \noindent%
         Ficha catalográfica (adicionar PDF)%
@@ -349,8 +355,8 @@
 % Redefinição do ambiente folhadeaprovacao.
 \newcommand{\imprimirfolhaaprovacao}{}
 \renewenvironment{folhadeaprovacao}{%
-    \clearpage%
-    \pdfbookmark[0]{\folhadeaprovacaoname}{fap}%
+    \clearpage
+    \marcar{Folha de aprovação}
 }{}
 
 % Estilização da folha de aprovação.
@@ -407,7 +413,7 @@
 
 % Dedicatória (opcional).
 \renewenvironment{dedicatoria}{
-    \pdfbookmark[0]{Dedicatória}{ded}
+    \marcar{Dedicatória}
     \vspace*{-\topskip}%
     \vspace*{\fill}%
     \begin{flushright}%
@@ -428,7 +434,7 @@
 
 % Epígrafe (opcional).
 \renewenvironment{epigrafe}{
-    \pdfbookmark[0]{Epígrafe}{epi}
+    \marcar{Epígrafe}
     \vspace*{\fill}%
     \begin{flushright}%
 }{%
@@ -443,7 +449,8 @@
 % Resumo e Abstract.
 \newcommand{\imprimirpalavraschave}{}
 \newcommand{\palavraschave}[1]{\renewcommand{\imprimirpalavraschave}{#1}}
-\newcommand{\keywords}[1]{\renewcommand{\imprimirpalavraschave}{#1}}
+\newcommand{\imprimirkeywords}{}
+\newcommand{\keywords}[1]{\renewcommand{\imprimirkeywords}{#1}}
 
 \newcommand{\imprimirresumo}{
     \IfFileExists{resumo}{
@@ -462,7 +469,7 @@
 
                 \vspace{\onelineskip}%
                 \noindent%
-                \textbf{Keywords}:~\imprimirpalavraschave.
+                \textbf{Keywords}:~\imprimirkeywords.
             \end{otherlanguage*}
         \end{resumo}
     }{}
