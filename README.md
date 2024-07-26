@@ -12,7 +12,7 @@ A classe é implementada com o objetivo de propiciar ao aluno a escrita do texto
 
 Você pode utilizar o FEECTeX localmente em seu computador ou na nuvem. Neste último caso, recomenda-se o [Overleaf](https://www.overleaf.com/). Já para trabalhar localmente, é necessário ter uma distribuição TeX instalada em seu computador, _e.g._, o [MiKTeX](https://miktex.org/) e o [TeX Live](https://tug.org/texlive/), e um editor, como o TeXstudio ou o Visual Studio Code com a extensão LaTeX Workshop.
 
-A maneira mais direta de iniciar a redação do seu trabalho é a seguinte. 1) Faça o download do repositório; 2) copie a pasta `template` (em `tex/doc/latex/feectex/template`) para algum lugar no seu computador; 3) copie o arquivo `feectex.cls` (em `tex/latex/feectex`) no diretório raiz (_i.e._, junto ao arquivo `principal.tex`) e você estará pronto para começar!
+A maneira mais direta de iniciar a redação do seu trabalho é a seguinte. 1) Faça o download do repositório ou do _release_ em formato .zip; 2) descompacte o arquivo, se necessário, e você estará pronto para começar!
 
 ### Preenchendo as informações necessárias e gerando o arquivo PDF
 
@@ -47,7 +47,7 @@ Preencha, então, o seu nome, o número do seu RA, o título e o nome de sua ori
 | \imprimirfichacatalografica{&hellip;}               | Imprime a ficha catalográfica (PDF).                  |
 | \imprimirfolhaaprovacao                             | Imprime a folha de aprovação.                         |
 | \imprimirdedicatoria                                | Imprime a dedicatória (opcional).                     |
-| \imprimiragradecimentos                             | Imprime os agradecimentos[^1].                        |
+| \imprimiragradecimentos                             | Imprime os agradecimentos (opcional)[^1].             |
 | \imprimirepigrafe                                   | Imprime a epígrade (opcional).                        |
 | \imprimirresumo                                     | Imprime o resumo e o _abstract_.                      |
 | \imprimirlistailustracoes                           | Imprime a lista de ilustrações (opcional).            |
@@ -73,12 +73,10 @@ Também foram criadas as versões em português para outros comandos. Veja abaix
 
 ## Versões
 
-### v2.0.0 (09/08/2023)
+### s1.0.0 (26/07/2024)
 
-* Remove o pacote `nomencl` e a geração automática da _Lista de Abreviaturas e Siglas_ e da _Lista de Símbolos_.
-* Corrige numeração na página do Sumário.
-* Corrige numeração das páginas no "bookmark".
-* Indica início dos Apêndice (`\partapendices`) e dos Anexos (`\partanexos`).
+* Release da versão simplificada.
+* Corrige alguns erros gramaticais no arquivo principal.tex.
 
 ## Isenção de Responsabilidade
 
