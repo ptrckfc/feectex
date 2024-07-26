@@ -1,5 +1,5 @@
 .vscode/
-
+*.*~
 *.aux
 *.lof
 *.log
@@ -16,7 +16,7 @@
 *.nlo
 *.nls
 *.pdf
-!tex/generic/images/unicamp-logotipo.pdf
+!unicamp-logotipo.pdf
 
 *.dvi
 *.xdv
