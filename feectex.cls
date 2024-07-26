@@ -225,7 +225,7 @@
             \SingleSpacing%
             \begin{minipage}{0.1\textwidth}%
                 \centering%
-                \includegraphics[width=1.5cm]{generic/images/unicamp-logotipo}
+                \includegraphics[width=1.5cm]{unicamp-logotipo}
             \end{minipage}%
             \begin{minipage}{0.9\textwidth}%
                 \centering%
